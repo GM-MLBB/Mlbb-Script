@@ -12,7 +12,8 @@ body{background:linear-gradient(180deg,#000000,#1a0f00);color:#fff;font-family:'
 .wrap{max-width:480px;margin:0 auto;padding:20px;text-align:center;position:relative;z-index:2}
 .logo{width:100px;border:3px solid #FFD700;border-radius:15px;box-shadow:0 0 30px #FFD700,0 0 60px rgba(255,215,0,0.5);margin:15px auto;animation:glow 2s infinite}
 @keyframes glow{0%,100%{box-shadow:0 0 30px #FFD700}50%{box-shadow:0 0 50px #FFD700}}
-h1{color:#FFD700;font-size:26px;font-weight:900;text-shadow:0 0 20px #FFD700,0 0 40px #FFA500;letter-spacing:2px}
+h1{color:#FFD700;font-size:26px;font-weight:900;text-shadow:0 0 20px #FFD700,0 0 40px #FFA500;letter-spacing:2px;animation:flicker 1.5s infinite}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:0.9}}
 .subtitle{color:#ccc;font-size:11px;margin-bottom:20px}
 .box{background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(0,0,0,0.5));border:1px solid #FFD700;border-radius:12px;padding:12px;margin:15px 0;font-size:12px;box-shadow:0 0 15px rgba(255,215,0,0.3)}
 .live{display:flex;justify-content:space-between;margin-top:5px;font-size:11px}
@@ -21,24 +22,24 @@ h1{color:#FFD700;font-size:26px;font-weight:900;text-shadow:0 0 20px #FFD700,0 0
 .btn{display:block;width:100%;padding:15px;margin:10px 0;border-radius:12px;text-decoration:none;font-weight:900;font-size:15px;transition:0.3s;cursor:pointer;border:none;letter-spacing:1px}
 .btn:hover{transform:scale(1.04)}
 .btn-tele{background:linear-gradient(90deg,#0088cc,#00aaff);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 0 20px rgba(0,136,204,0.6)}
-.btn-free{background:transparent;border:2px solid #0f0;color:#0f0;box-shadow:0 0 20px rgba(0,255,0,0.5)}
+.btn-free{background:linear-gradient(90deg,#0f0,#00ff88);color:#000;box-shadow:0 0 25px rgba(0,255,0,0.7);font-size:16px}
 .btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;box-shadow:0 0 25px rgba(255,215,0,0.7)}
 
-/* ITEM - PRO DI SAMPING */
-.item{background:linear-gradient(135deg,#111,#1a1a1a);border:2px solid #FFD700;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 0 15px rgba(255,215,0,0.2);transition:0.2s}
+/* ITEM PREMIUM KEREN */
+.item{background:linear-gradient(135deg,#111,#1a1a1a);border:2px solid #FFD700;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 0 15px rgba(255,215,0,0.2);transition:0.2s;position:relative;overflow:hidden}
 .item:hover{box-shadow:0 0 30px #FFD700;border-color:#FFF;transform:translateY(-2px)}
-.item-left{display:flex;align-items:center;gap:8px;text-align:left}
+.item::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,215,0,0.1),transparent);transform:rotate(45deg);animation:shine 3s infinite}
+@keyframes shine{0%{left:-200%}100%{left:200%}}
+.item-left{display:flex;align-items:center;gap:8px;text-align:left;z-index:2}
 .item-name{font-size:13px;font-weight:700}
-.item-right{display:flex;align-items:center;gap:8px}
-.badge{background:#FFD700;color:#000;font-size:9px;padding:3px 7px;border-radius:5px;font-weight:900;box-shadow:0 0 8px #FFD700}
-.price{color:#FFD700;font-size:16px;font-weight:900;text-shadow:0 0 10px #FFD700}
+.badge{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;font-size:9px;padding:3px 7px;border-radius:5px;font-weight:900;box-shadow:0 0 8px #FFD700}
+.price{color:#FFD700;font-size:16px;font-weight:900;text-shadow:0 0 10px #FFD700;z-index:2}
 hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,transparent);margin:20px 0}
-
-/* ANIMASI SCANNING */
 #targetLoc{color:#FFD700;text-shadow:0 0 8px #FFD700}
 .scanning::after{content:'...';animation:dots 1.5s steps(4,end) infinite}
 @keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
 
+/* POPUP */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:999;justify-content:center;align-items:center}
 .modal-box{background:linear-gradient(180deg,#111,#000);border:2px solid #FFD700;border-radius:15px;padding:20px;width:90%;max-width:400px;position:relative;text-align:center;box-shadow:0 0 40px #FFD700}
 .close{position:absolute;top:10px;right:15px;font-size:24px;color:#FFD700;cursor:pointer}
@@ -65,9 +66,8 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,t
 <div class="wrap">
   <img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg">
   <h1>MLBB SCRIPT PREMIUM</h1>
-  <p class="subtitle">ANTI BAN 100%  |  VVIP SCRIPT</p>
+  <p class="subtitle">ANTI BAN 100% | VVIP SCRIPT</p>
 
-  <!-- TRACK GPS DENGAN ANIMASI -->
   <div class="box">
     📍 TARGET: <span id="targetLoc" class="scanning">SCANNING GPS</span>
     <div class="live">
@@ -76,18 +76,20 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,t
     </div>
   </div>
 
-  <h3 style="color:#fff">FREE DOWNLOAD</h3>
+  <h3 style="color:#0f0">✅ FREE DOWNLOAD</h3>
+  <div class="btn btn-free" onclick="downloadFree()">🔥 DOWNLOAD SCRIPT FREE<br><small style="font-weight:400">Basic Damage +10% - No Ban</small></div>
+
   <a class="btn btn-tele" href="https://t.me/+wzc2pT_ejKczMTA1" target="_blank"> 
     <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
     JOIN TELEGRAM GM
   </a>
-  <div class="btn btn-free" onclick="alert('Link: https://modsfire.com/VSDM6xLPreX5bwh')">🔥 SCRIPT DAMAGE FREE<br><small style="font-weight:400">Basic Damage +10% - No Ban</small></div>
 
   <hr>
-  <h3 style="color:#FFD700">💎PREMIUM ACCESS💎</h3>
-  <div class="btn btn-gold" onclick="openPay('JOIN MEMBERSHIP GM',100000)">👑 JOIN MEMBERSHIP GM 👑</div>
+  <h3 style="color:#FFD700">💎 PREMIUM ACCESS 💎</h3>
+  <div class="btn btn-gold" onclick="openPay('Full Script Vip Free'100000)">👑 JOIN MEMBERSHIP GM 👑</div>
 
-  <div class="item" onclick="openPay('SCRIPT DAMAGE HIGH',150000)">
+  <!-- PREMIUM UDAH DIBUKA -->
+  <div class="item" onclick="openPay('SCRIPT DAMAGE SEMI HIGH',150000)">
     <div class="item-left">
       <span class="item-name">SCRIPT DAMAGE 1 - 2 HIT</span>
       <span class="badge">PRO</span>
@@ -97,23 +99,23 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,t
     </div>
   </div>
 
-  <div class="item" onclick="openPay('SCRIPT RANK BOOSTER',75000)">
+  <div class="item" onclick="openPay('SCRIPT RANK BOOSTER',70000)">
     <div class="item-left">
       <span class="item-name">SCRIPT RANK BOOSTER</span>
       <span class="badge">PRO</span>
     </div>
     <div class="item-right">
-      <span class="price">75K</span>
+      <span class="price">70K</span>
     </div>
   </div>
 
-  <div class="item" onclick="openPay('INJECT DAMAGE NO CLONE',125000)">
+  <div class="item" onclick="openPay('INJECT DAMAGE NO CLONE',150000)">
     <div class="item-left">
-      <span class="item-name">INJECT DAMAGE NO CLONE</span>
+      <span class="item-name">INJECT+BOOST DAMAGE NO CLONE</span>
       <span class="badge">PRO</span>
     </div>
     <div class="item-right">
-      <span class="price">125K</span>
+      <span class="price">150K</span>
     </div>
   </div>
 
@@ -141,17 +143,18 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,t
       <small>Batas waktu: <span class="timer" id="timer">05:00</span></small>
     </div>
     <div class="status success" id="statusOk">
-      ✅ PEMBAYARAN TERDETEKSI<br>
-      <small>File akan dikirim via WA/Tele</small>
+      ✅ BERHASIL<br>
+      <small>Mengarahkan ke halaman download...</small>
     </div>
 
     <div class="qris-wrap">
       <img src="https://i.imgur.com/JCmPhXL.jpeg" class="qris-big">
       <div class="scan-line"></div>
     </div>
-    <p style="font-size:11px;color:#aaa">Scan All Bank + Ewallet</p>
+    <p style="font-size:11px;color:#aaa">Scan pake DANA / OVO / Gopay / ShopeePay</p>
 
-    <div class="paybtn dana" onclick="copy('081331763530')">
+    <input type="text" id="copyInput" value="081331763530" style="position:absolute;left:-9999px">
+    <div class="paybtn dana" onclick="copyNo()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.5 16.5h-9a1.5 1.5 0 01-1.5-1.5v-6a1.5 1.5 0 011.5-1.5h9a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-1.5 1.5z"/></svg>
       SALIN NO DANA: 0813-3176-3530
     </div>
@@ -169,8 +172,8 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,t
 <script>
 let dataHarga = 0;
 let timerInterval;
+let downloadLink = "";
 
-// FUNGSI TRACK GPS DENGAN ANIMASI
 function getLocation(){
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -201,6 +204,12 @@ function showError(error){
 }
 window.onload = getLocation;
 
+function downloadFree(){
+  let freeLink = "https://modsfire.com/VSDM6xLPreX5bwh"; // GANTI LINK FREE
+  alert("✅ Klik OK Proses Download...");
+  setTimeout(()=>{window.location.href = freeLink;},500)
+}
+
 function openPay(nama,harga){
   dataHarga = harga;
   document.getElementById('modal').style.display='flex';
@@ -208,6 +217,13 @@ function openPay(nama,harga){
   let h = 'Rp '+harga.toLocaleString('id-ID');
   document.getElementById('pHarga').innerText=h;
   
+  // LINK DOWNLOAD PER PRODUK PREMIUM
+  if(nama.includes('PREMIUM')) downloadLink = "https://modsfile.com/VSDM6xLPreX5bwh";
+  else if(nama.includes('RANK')) downloadLink = "https://modsfile.com/RankBooster123";
+  else if(nama.includes('CLONE')) downloadLink = "https://modsfile.com/NoCloneDamage";
+  else if(nama.includes('COMBO')) downloadLink = "https://modsfile.com/ComboHemat500";
+  else downloadLink = "https://modsfile.com/MembershipGM";
+
   let pesan = 'Halo min saya sudah bayar '+nama+' sebesar '+h;
   document.getElementById('pWa').href='https://wa.me/6281331763530?text='+encodeURIComponent(pesan);
   document.getElementById('pTele').href='https://t.me/ERR0R_CODER?text='+encodeURIComponent(pesan);
@@ -222,9 +238,13 @@ function closePay(){
   clearInterval(timerInterval);
 }
 
-function copy(no){
-  navigator.clipboard.writeText(no);
-  alert('✅ Sudah dicopy: '+no+'\n\nBuka app DANA/Bank > Paste > Transfer sesuai nominal');
+function copyNo(){
+  let copyText = document.getElementById("copyInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  document.execCommand("copy");
+  alert("✅ No DANA sudah disalin: 0813-3176-3530");
 }
 
 function startTimer(detik){
@@ -241,18 +261,16 @@ function startTimer(detik){
 document.getElementById('pWa').addEventListener('click',()=>{success()})
 document.getElementById('pTele').addEventListener('click',()=>{success()})
 function success(){
-  setTimeout(()=>{
-    document.getElementById('statusWait').style.display='none';
-    document.getElementById('statusOk').style.display='block';
-  },500)
+  document.getElementById('statusWait').style.display='none';
+  document.getElementById('statusOk').style.display='block';
+  setTimeout(()=>{window.location.href = downloadLink;},1500)
 }
 
 // PARTIKEL EMAS
 const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;
-let parts=[];for(let i=0;i<60;i++){parts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*3+1,sp:Math.random()*0.5+0.2})}
+let parts=[];for(let i=0;i<80;i++){parts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*3+1,sp:Math.random()*0.5+0.2})}
 function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);parts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fillStyle='rgba(255,215,0,0.7)';ctx.fill();p.y+=p.sp;if(p.y>canvas.height)p.y=0});requestAnimationFrame(draw)}draw()
 
-// LIVE RANDOM
 setInterval(()=>{document.getElementById('live').innerText=Math.floor(Math.random()*300)+50},2000)
 </script>
 </body>
