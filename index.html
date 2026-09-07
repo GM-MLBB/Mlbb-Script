@@ -4,49 +4,108 @@
 <title>⚡ MLBB SCRIPT GM HUB ⚡</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600&display=swap');
+
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:white;font-family:'Poppins';text-align:center;overflow:hidden}
+body{
+  background:#000 url('https://i.imgur.com/8zQvQ9L.jpg') no-repeat center fixed;
+  background-size:cover;
+  color:white;
+  font-family:'Rajdhani', sans-serif;
+  text-align:center;
+  overflow-x:hidden;
+}
+body:before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:-1}
 
-/* EFEK PARTIKEL */
-.particle{position:fixed;top:-10px;width:2px;height:10px;background:#00f0ff;animation:fall 3s linear infinite;opacity:0.5;z-index:-1}
-@keyframes fall{to{transform:translateY(100vh)}}
+.line{position:fixed;top:-100px;width:1px;height:100px;background:linear-gradient(transparent,#00f0ff);animation:rain 2s linear infinite;z-index:-1}
+@keyframes rain{to{transform:translateY(120vh)}}
 
-/* EFEK PETIR */
-.flash{position:fixed;top:0;left:0;width:100%;height:100%;background:white;opacity:0;z-index:999;pointer-events:none;animation:lightning 7s infinite}
-@keyframes lightning{0%,95%,100%{opacity:0}96%{opacity:0.3}97%{opacity:0}}
+/* LOGO BARU */
+.logo{
+  width:100px;
+  height:100px;
+  margin:20px auto 10px;
+  border-radius:50%;
+  border:3px solid #00f0ff;
+  box-shadow:0 0 25px #00f0ff;
+  animation:glow-logo 2s infinite alternate;
+}
+@keyframes glow-logo{0%{box-shadow:0 0 15px #00f0ff}100%{box-shadow:0 0 35px #ff00c8}}
 
-.bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 30%, #00f0ff33, transparent 60%);animation:glow 3s infinite alternate;z-index:-1}
-@keyframes glow{0%{opacity:0.3}100%{opacity:0.9}}
+h1{
+  font-family:'Orbitron', sans-serif;
+  font-size:28px;
+  font-weight:900;
+  background:linear-gradient(90deg,#ff00c8,#00f0ff,#ff00c8);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradient 3s linear infinite;
+  margin:10px 0;
+  text-shadow:0 0 20px #00f0ff;
+}
+@keyframes gradient{0%{background-position:0%}100%{background-position:200%}}
 
-h1{font-size:34px;color:#00f0ff;text-shadow:0 0 10px #00f0ff,0 0 30px #00f0ff;animation:flicker 1.5s infinite;margin:30px 0 10px}
-@keyframes flicker{0%,100%{text-shadow:0 0 10px #00f0ff,0 0 20px #00f0ff}50%{text-shadow:0 0 5px #ff00c8,0 0 40px #ff00c8}}
+.subtitle{color:#aaa;font-size:14px;margin-bottom:30px;font-weight:600}
 
-p{color:#aaa;margin-bottom:30px}
+.btn-full{
+  display:block;
+  background:linear-gradient(90deg,#ff00c8,#00f0ff);
+  color:#000;
+  padding:22px;
+  margin:20px 10px;
+  border-radius:12px;
+  text-decoration:none;
+  font-family:'Orbitron', sans-serif;
+  font-size:16px;
+  font-weight:900;
+  box-shadow:0 0 30px #00f0ffaa;
+  animation:pulse 1.2s infinite;
+  border:2px solid #fff;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
-.btn-full{display:block;background:linear-gradient(90deg,#ff00c8,#00f0ff);color:#000;padding:22px;margin:20px 10px;border-radius:15px;text-decoration:none;font-size:18px;font-weight:900;box-shadow:0 0 30px #00f0ffaa;animation:pulse 1.2s infinite;transition:0.3s}
-.btn-full:hover{transform:scale(1.05)}
-@keyframes pulse{0%,100%{box-shadow:0 0 25px #00f0ffaa}50%{box-shadow:0 0 50px #ff00c8ff}}
+h2{
+  font-family:'Orbitron', sans-serif;
+  color:#00f0ff;
+  margin:40px 0 20px;
+  font-size:18px;
+  letter-spacing:2px;
+}
 
-.btn{display:block;background:#0e1220;padding:20px;margin:12px 10px;border-radius:15px;text-decoration:none;color:white;border:2px solid #333;transition:0.3s;position:relative;overflow:hidden}
-.btn:before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,#00f0ff88,transparent);transition:0.5s}
-.btn:hover:before{left:100%}
-.btn:hover{border-color:#00f0ff;transform:translateY(-3px);box-shadow:0 5px 25px #00f0ff77}
-
-b{font-size:16px}
-span{color:#aaa;font-size:12px}
+.btn{
+  display:block;
+  background:rgba(10,20,40,0.8);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  margin:12px 10px;
+  border-radius:12px;
+  text-decoration:none;
+  color:white;
+  border:2px solid #00f0ff55;
+  transition:0.3s;
+}
+.btn:hover{
+  border-color:#00f0ff;
+  transform:translateY(-3px);
+  box-shadow:0 0 25px #00f0ff;
+  background:rgba(0,240,255,0.1);
+}
+.btn b{font-family:'Orbitron', sans-serif;font-size:15px}
+.btn span{color:#aaa;font-size:12px;font-weight:600}
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="flash"></div>
+
+<!-- LOGO DITAMBAH DISINI -->
+<img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg" alt="MLBB Logo">
 
 <h1>⚡ MLBB SCRIPT GM HUB ⚡</h1>
-<p>Download Script Damage - Rank Booster No Password</p>
+<p class="subtitle">Download Script Damage - Rank Booster - No Password</p>
 
-<a class="btn-full" href="LINK_FULL_PAKET_KAMU">📦 DOWNLOAD FULL SCRIPT GM</a>
+<a class="btn-full" href="https://t.me/+wzc2pT_ejKczMTA1">📦 DOWNLOAD FULL SCRIPT GM</a>
 
-<h2 style="color:#00f0ff;margin:40px 0 20px">PILIH KATEGORI SCRIPT</h2>
+<h2>PILIH KATEGORI SCRIPT</h2>
 
 <a class="btn" href="LINK_DAMAGE">🔥 <b>SCRIPT DAMAGE</b><br><span>All Hero Damage 100% - No Cooldown</span></a>
 
@@ -54,19 +113,18 @@ span{color:#aaa;font-size:12px}
 
 <a class="btn" href="LINK_ANTILAG">⚡ <b>SCRIPT ANTI LAG</b><br><span>FPS Stabil, Ping Ijo Terus</span></a>
 
-<!-- MUSIK BACKGROUND -->
+<!-- MUSIK -->
 <audio autoplay loop>
   <source src="https://drive.google.com/uc?export=download&id=1a0DNmqWGnA7W0yeZr1-ykZ_773-xqgKD" type="audio/mpeg">
 </audio>
 
-<!-- SCRIPT PARTIKEL -->
 <script>
-for(let i=0;i<30;i++){
-  let p=document.createElement('div');
-  p.className='particle';
-  p.style.left=Math.random()*100+'%';
-  p.style.animationDelay=Math.random()*3+'s';
-  document.body.appendChild(p);
+for(let i=0;i<20;i++){
+  let l=document.createElement('div');
+  l.className='line';
+  l.style.left=Math.random()*100+'%';
+  l.style.animationDelay=Math.random()*2+'s';
+  document.body.appendChild(l);
 }
 </script>
 
