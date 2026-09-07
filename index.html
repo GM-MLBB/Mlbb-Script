@@ -8,7 +8,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  background:#000; /* HAPUS BACKGROUND GAMBAR */
+  background:#000;
   color:white;
   font-family:'Rajdhani', sans-serif;
   text-align:center;
@@ -16,48 +16,47 @@ body{
   min-height:100vh;
 }
 
-/* CANVAS EFEK JATUH */
-#matrix{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  z-index:-1;
-}
+#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
 
 .logo{
   width:110px;
   height:110px;
   margin:25px auto 15px;
   border-radius:50%;
-  border:3px solid #00f0ff;
-  box-shadow:0 0 20px #ff00c8, 0 0 40px #00f0ff;
-  animation:glow-logo 2s infinite alternate;
+  border:3px solid #ff0000;
+  box-shadow:0 0 20px #ff0000, 0 0 40px #ff6600;
+  animation:glow-logo 1.5s infinite alternate;
   object-fit:cover;
   position:relative;
   z-index:1;
 }
-@keyframes glow-logo{0%{box-shadow:0 0 15px #00f0ff}100%{box-shadow:0 0 35px #ff00c8}}
+@keyframes glow-logo{0%{box-shadow:0 0 15px #ff0000}100%{box-shadow:0 0 35px #ff6600}}
 
+/* JUDUL EFEK PETIR */
 h1{
   font-family:'Orbitron', sans-serif;
   font-size:24px;
   font-weight:900;
-  background:linear-gradient(90deg,#ff00c8,#00f0ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:gradient 3s linear infinite;
-  text-shadow:0 0 15px #00f0ff;
+  color:#fff;
+  text-shadow:0 0 10px #00f0ff;
+  animation:lightning 2s infinite;
   position:relative;
   z-index:1;
 }
-@keyframes gradient{0%{background-position:0%}100%{background-position:200%}}
+@keyframes lightning{
+ 0%,100%{text-shadow:0 0 10px #00f0ff, 0 0 20px #00f0ff}
+  5%,15%{text-shadow:0 0 30px #fff, 0 0 60px #00f0ff, 0 0 90px #ff00c8}
+ 10%{text-shadow:none}
+}
 
 .subtitle{color:#aaa;font-size:12px;margin-bottom:25px;font-weight:600;position:relative;z-index:1}
 
+/* TOMBOL MERAH API BARU */
 .btn-full{
   display:block;
-  background:linear-gradient(90deg,#ff00c8,#00f0ff);
-  color:#000;
+  background:linear-gradient(90deg,#ff0000,#ff6600,#ff0000);
+  background-size:200%;
+  color:#fff;
   padding:20px;
   margin:20px 15px;
   border-radius:12px;
@@ -65,17 +64,18 @@ h1{
   font-family:'Orbitron', sans-serif;
   font-size:15px;
   font-weight:900;
-  box-shadow:0 0 25px #00f0ffaa;
-  border:2px solid #fff;
-  animation:pulse 1.5s infinite;
+  box-shadow:0 0 25px #ff0000aa;
+  border:2px solid #ff6600;
+  animation:fire 1.5s infinite, pulse 1.5s infinite;
   position:relative;
   z-index:1;
 }
+@keyframes fire{0%{background-position:0%}100%{background-position:200%}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
 h2{
   font-family:'Orbitron', sans-serif;
-  color:#00f0ff;
+  color:#ff6600;
   margin:30px 0 15px;
   font-size:16px;
   letter-spacing:2px;
@@ -85,33 +85,33 @@ h2{
 
 .btn{
   display:block;
-  background:rgba(5,10,30,0.9);
+  background:rgba(30,5,5,0.9);
   backdrop-filter:blur(10px);
   padding:18px;
   margin:10px 15px;
   border-radius:10px;
   text-decoration:none;
   color:white;
-  border:1px solid #00f0ff66;
+  border:1px solid #ff000066;
   transition:0.3s;
   position:relative;
   z-index:1;
 }
-.btn:hover{border-color:#00f0ff;box-shadow:0 0 20px #00f0ff}
+.btn:hover{border-color:#ff0000;box-shadow:0 0 20px #ff0000}
 .btn b{font-family:'Orbitron', sans-serif;font-size:14px}
 .btn span{color:#aaa;font-size:11px;font-weight:600}
 </style>
 </head>
 <body>
 
-<canvas id="matrix"></canvas> <!-- EFEK JATUH DISINI -->
+<canvas id="matrix"></canvas>
 
 <img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg" alt="Logo">
 
 <h1>⚡ MLBB SCRIPT GM HUB ⚡</h1>
 <p class="subtitle">Download Script Damage - Rank Booster - No Password</p>
 
-<a class="btn-full" href="LINK_FULL_PAKET_KAMU">📦 DOWNLOAD FULL SCRIPT GM</a>
+<a class="btn-full" href="LINK_FULL_PAKET_KAMU">🔥 DOWNLOAD FULL SCRIPT GM 🔥</a>
 
 <h2>PILIH KATEGORI SCRIPT</h2>
 
@@ -126,32 +126,26 @@ h2{
 </audio>
 
 <script>
-// SCRIPT MATRIX JATUH
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const chars = "01"; // bisa ganti jadi "MLBBSCRIPT"
+const chars = "01";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
 const drops = [];
-
 for(let i=0;i<columns;i++) drops[i]=1;
 
 function draw(){
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-  
-  ctx.fillStyle = "#00f0ff"; // warna jatuh biru
+  ctx.fillStyle = "#00f0ff";
   ctx.font = fontSize + "px monospace";
-  
   for(let i=0;i<drops.length;i++){
     const text = chars[Math.floor(Math.random()*chars.length)];
     ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-    
-    if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
-      drops[i]=0;
+    if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i]=0;
     drops[i]++;
   }
 }
