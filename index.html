@@ -1,210 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title> MLBB SCRIPT GM HUB </title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLBB SCRIPT GM HUB</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#000;color:white;font-family:'Orbitron',sans-serif;overflow-x:hidden}
-#matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;opacity:0.3}
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
-.content{position:relative;z-index:1;padding:20px;max-width:500px;margin:auto;text-align:center}
-.logo{width:100px;margin:15px auto;filter:drop-shadow(0 0 15px #00ff00)}
-h1{font-family:'Orbitron';color:#00ff00;font-size:28px;font-weight:900;animation:glitch 2s infinite;letter-spacing:2px}
-@keyframes glitch{0%{text-shadow:0 0 10px #00ff00}20%{text-shadow:-2px 0 #f00,2px 0 #0ff}40%{text-shadow:0 0 10px #00ff00}60%{text-shadow:2px 0 #f00,-2px 0 #0ff}100%{text-shadow:0 0 20px #00ff00}}
-.subtitle{color:#aaa;font-size:12px;margin-bottom:20px;letter-spacing:1px}
-.tracker{background:rgba(0,255,0,0.1);border:1px solid #0f0;padding:10px;border-radius:10px;margin:15px 0;font-size:13px;box-shadow:0 0 15px rgba(0,255,0,0.3)}
-.free-box{background:linear-gradient(135deg, rgba(0,255,0,0.1), rgba(0,255,0,0.05));border:2px solid #00ff00;border-radius:12px;padding:15px;margin:15px 0;box-shadow:0 0 20px rgba(0,255,0,0.4);transition:0.3s;cursor:pointer;}
-.free-box:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(0,255,0,0.7);}
-.free-title{color:#00ff00;font-size:16px;font-weight:900;margin-bottom:5px;text-shadow:0 0 10px #00ff00;}
-.free-desc{color:#ccc;font-size:12px;font-weight:400;}
-.premium-box{background:linear-gradient(135deg, #1a1a1a, #0a0a0a);border:2px solid #FFD700;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;box-shadow:0 0 15px rgba(255,215,0,0.3);transition:0.3s;cursor:pointer;}
-.premium-box:hover{transform:scale(1.03);border-color:#FFF;box-shadow:0 0 25px rgba(255,215,0,0.8);}
-.premium-left{display:flex;flex-direction:column;align-items:flex-start}
-.premium-name{font-weight:900;font-size:14px;color:#fff;letter-spacing:1px}
-.premium-badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:900;margin-top:4px}
-.premium-price{font-weight:900;font-size:18px;color:#FFD700;text-shadow:0 0 10px #FFD700}
-.btn-order{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;width:100%;padding:16px;border-radius:12px;font-weight:900;font-size:16px;border:none;margin:15px 0;box-shadow:0 0 20px rgba(255,215,0,0.6);transition:0.3s;cursor:pointer;letter-spacing:1px;}
-.btn-order:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(255,215,0,1)}
-.btn-tele{width:100%;padding:15px;background:#0088ff;color:#fff;border-radius:12px;text-decoration:none;font-weight:900;font-size:15px;display:block;margin:10px 0;box-shadow:0 0 15px rgba(0,136,255,0.5)}
-.btn-tele:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(0,136,255,0.8)}
-.divider{margin:20px 0;height:2px;background:linear-gradient(90deg,transparent,#0f0,transparent)}
-.section-title{color:#FFD700;margin:20px 0 10px;font-size:18px;font-weight:900;text-shadow:0 0 15px #FFD700}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:'Orbitron',sans-serif;overflow-x:hidden}
+#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.3}
+.wrap{max-width:480px;margin:0 auto;padding:20px;text-align:center;position:relative;z-index:2}
+.logo{width:90px;border:2px solid red;border-radius:10px;box-shadow:0 0 20px red;margin:10px auto}
+h1{color:#00ff00;font-size:24px;font-weight:900;text-shadow:0 0 15px #00ff00;animation:flicker 1.5s infinite}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:0.8}}
+.box{background:rgba(0,255,0,0.08);border:1px solid #0f0;border-radius:10px;padding:10px;margin:15px 0;font-size:12px}
+.live{display:flex;justify-content:space-between;margin-top:5px}
+.dot{width:8px;height:8px;background:#0f0;border-radius:50%;animation:blink 1s infinite;display:inline-block}
+@keyframes blink{50%{opacity:0}}
+.btn{display:block;width:100%;padding:14px;margin:10px 0;border-radius:10px;text-decoration:none;font-weight:900;font-size:14px;transition:0.2s;cursor:pointer;border:none}
+.btn:hover{transform:scale(1.03)}
+.btn-tele{background:#0088cc;color:#fff}
+.btn-free{background:transparent;border:2px solid #0f0;color:#0f0;box-shadow:0 0 15px #0f0}
+.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
+.item{background:#111;border:2px solid #FFD700;border-radius:10px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.item:hover{box-shadow:0 0 20px #FFD700}
+.item b{color:#FFD700}
+.badge{background:#FFD700;color:#000;font-size:10px;padding:2px 6px;border-radius:4px}
+hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#0f0,transparent);margin:20px 0}
 
-/* POPUP */
-.modal{display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center}
-.modal-content{background:#111;border:2px solid #FFD700;border-radius:15px;padding:25px;width:90%;max-width:400px;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 0 30px #FFD700;font-family:'Orbitron'}
-.modal-content h2{color:#FFD700;font-weight:900;margin-bottom:10px}
-#namaProduk{color:#00ff00;font-size:18px;font-weight:700}
-#hargaProduk{color:#FFD700;font-size:20px;font-weight:900}
-.payment-item{background:#222;border:1px solid #333;border-radius:10px;padding:12px;margin:10px 0;text-decoration:none;color:#fff;display:block;font-weight:700;transition:0.2s}
-.payment-item:hover{background:#333;border-color:#FFD700;transform:scale(1.02)}
-.payment-item b{color:#00ff00}
-.qris-img{width:180px;height:180px;margin:10px auto;border:2px solid #fff;border-radius:10px}
-.close{color:#fff;float:right;font-size:28px;font-weight:bold;cursor:pointer}
-.close:hover{color:#FFD700}
-.btn-wa{background:#25D366!important;color:#fff!important}
-.note{font-size:11px;color:#aaa;margin-top:10px}
+/* POPUP AUTO BAYAR */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:999;justify-content:center;align-items:center}
+.modal-box{background:#0a0a0a;border:2px solid #FFD700;border-radius:15px;padding:20px;width:90%;max-width:400px;position:relative;text-align:center}
+.close{position:absolute;top:10px;right:15px;font-size:24px;color:#fff;cursor:pointer}
+.auto-title{color:#FFD700;font-size:18px;font-weight:900;margin-bottom:10px}
+.qris-big{width:200px;height:200px;border:3px solid #0f0;border-radius:12px;margin:10px auto;box-shadow:0 0 20px #0f0}
+.timer{font-size:32px;color:#00ff00;font-weight:900;text-shadow:0 0 10px #0f0}
+.nominal{font-size:24px;color:#FFD700;font-weight:900}
+.status{margin:15px 0;padding:10px;border-radius:8px;background:#222}
+.status.waiting{border:1px solid #FFD700;color:#FFD700}
+.status.success{border:1px solid #0f0;color:#0f0;display:none}
+.paybtn{display:block;background:#222;border:1px solid #444;color:#fff;padding:12px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:700;cursor:pointer}
+.wa{background:#25D366!important}
 </style>
 </head>
 <body>
+<canvas id="matrix"></canvas>
 
-<canvas id="matrixCanvas"></canvas>
-<canvas id="particles"></canvas>
-
-<div class="content">
+<div class="wrap">
   <img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg">
-  <h1> MLBB SCRIPT PREMIUM </h1>
-  <p class="subtitle">ANTI BAN 100%</p>
+  <h1>MLBB SCRIPT PREMIUM</h1>
+  <p style="color:#aaa;font-size:11px">ANTI BAN 100%</p>
 
-  <div class="tracker">
-    📍 TARGET: <b>Mlonggo, Indonesia [IP]</b><br>
-    👁️ LIVE: <span>0</span> | PING: 10ms
-  </div>
-
-  <h2 style="font-weight:900">FREE DOWNLOAD</h2>
-  <a class="btn-tele" href="https://t.me/+wzc2pT_ejKczMTA1" target="_blank"> 📢 JOIN TELEGRAM GM </a>
-  <div class="free-box" onclick="alert('Link download: https://ComingSoon')">
-    <div class="free-title">🔥 SCRIPT DAMAGE FREE</div>
-    <div class="free-desc">Basic Damage +10% - No Ban</div>
-  </div>
-
-  <div class="divider"></div>
-
-  <h2 class="section-title">👑 PREMIUM ACCESS 👑</h2>
-  <button class="btn-order" onclick="bukaPopup('PRIVATE SCRIPT, FULL UPDATE FREE','100000')">🔱 JOIN MEMBERSHIP GM 🔱</button>
-
-  <div class="premium-box" onclick="bukaPopup('SCRIPT DAMAGE PREMIUM','150000')">
-    <div class="premium-left">
-      <div class="premium-name">🌟 SCRIPT DAMAGE PREMIUM</div>
-      <div class="premium-badge">PRO</div>
+  <div class="box">
+    📍 TARGET: Mlonggo, Indonesia [IP]
+    <div class="live">
+      <span><span class="dot"></span> LIVE: <span id="live">0</span></span>
+      <span>PING: <b style="color:#0f0">12ms</b></span>
     </div>
-    <div class="premium-price">150K</div>
   </div>
 
-  <div class="premium-box" onclick="bukaPopup('SCRIPT RANK BOOSTER','75000')">
-    <div class="premium-left">
-      <div class="premium-name">🚀 SCRIPT RANK BOOSTER</div>
-      <div class="premium-badge">PRO</div>
-    </div>
-    <div class="premium-price">75K</div>
-  </div>
+  <h3>FREE DOWNLOAD</h3>
+  <a class="btn btn-tele" href="https://t.me/+wzc2pT_ejKczMTA1" target="_blank">📢 JOIN TELEGRAM GM</a>
+  <div class="btn btn-free" onclick="alert('Link: https://ComingSoon')">🔥 SCRIPT DAMAGE FREE<br><small style="font-weight:400">Basic Damage +10% - No Ban</small></div>
 
-  <div class="premium-box" onclick="bukaPopup('BOOST DAMAGE NO CLONE','125000')">
-    <div class="premium-left">
-      <div class="premium-name">⚡ INJECT DAMAGE NO CLONE</div>
-      <div class="premium-badge">PRO</div>
-    </div>
-    <div class="premium-price">125K</div>
-  </div>
+  <hr>
+  <h3 style="color:#FFD700">👑 PREMIUM ACCESS 👑</h3>
+  <div class="btn btn-gold" onclick="openPay('JOIN MEMBERSHIP GM',50000)">👑 JOIN MEMBERSHIP GM 👑</div>
 
-  <div class="premium-box" onclick="bukaPopup('BOOST DAMAGE + RANK BOOST','50000')">
-    <div class="premium-left">
-      <div class="premium-name">📛  PAKET COMBO HEMAT</div>
-      <div class="premium-badge">PRO</div>
-    </div>
-    <div class="premium-price">50K</div>
+  <div class="item" onclick="openPay('SCRIPT DAMAGE PREMIUM',150000)">
+    <div>⭐ SCRIPT DAMAGE PREMIUM<br><span class="badge">PRO</span></div><b>150K</b>
   </div>
-
+  <div class="item" onclick="openPay('SCRIPT RANK BOOSTER',75000)">
+    <div>🚀 SCRIPT RANK BOOSTER<br><span class="badge">PRO</span></div><b>75K</b>
+  </div>
+  <div class="item" onclick="openPay('INJECT DAMAGE NO CLONE',125000)">
+    <div>⚡ INJECT DAMAGE NO CLONE<br><span class="badge">PRO</span></div><b>125K</b>
+  </div>
+  <div class="item" onclick="openPay('PAKET COMBO HEMAT',50000)">
+    <div>👑 PAKET COMBO HEMAT<br><span class="badge">PRO</span></div><b>50K</b>
+  </div>
 </div>
 
-<!-- POPUP PEMBAYARAN -->
-<div id="modalBayar" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="tutupPopup()">&times;</span>
-    <h2>PEMBAYARAN</h2>
-    <p>Produk: <b id="namaProduk">-</b></p>
-    <p>Harga: <b id="hargaProduk">-</b></p>
+<!-- POPUP AUTO BAYAR -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <span class="close" onclick="closePay()">×</span>
+    <div class="auto-title">⚡ AUTO PAYMENT SYSTEM ⚡</div>
+    <p>Produk: <b id="pNama" style="color:#0f0"></b></p>
+    <p class="nominal" id="pHarga"></p>
 
-    <b>BAYAR SESUAI PRODUK:</b>
-    <a id="linkDana" href="#" target="_blank" class="payment-item">
-      💸 BAYAR VIA DANA<br><b>0813-3176-3530</b><br><span>A.N: Abdul Hanif</span>
-    </a>
-    <a href="#" class="payment-item" onclick="copyRek('5859458203564076','Bank Neo')">
-      🏦 TRANSFER BANK NEO<br><b>5859 4582 0356 4076</b><br><span>A.N: Gilang Yulfani Trisna - Klik untuk copy</span>
-    </a>
+    <div class="status waiting" id="statusWait">
+      ⏳ Scan QRIS di bawah ini<br>
+      <small>Batas waktu: <span class="timer" id="timer">05:00</span></small>
+    </div>
+    <div class="status success" id="statusOk">
+      ✅ PEMBAYARAN TERDETEKSI<br>
+      <small>File akan dikirim via WA</small>
+    </div>
 
-    <b>ATAU SCAN QRIS:</b>
-    <img src="https://i.imgur.com/JCmPhXL.jpeg" class="qris-img">
-    <span>Nominal: <b id="nominalQris" style="color:#00ff00">-</b></span>
+    <img src="https://i.imgur.com/JCmPhXL.jpeg" class="qris-big">
+    <p style="font-size:11px;color:#aaa">All Scan Bank + Ewallet</p>
 
-    <hr style="border-color:#333;margin:15px 0">
-    <a id="linkWA" href="#" target="_blank" class="payment-item btn-wa">
-      ✅ SUDAH BAYAR - KIRIM BUKTI KE WA
-    </a>
-    <p class="note">Transfer sesuai nominal. File dikirim max 5 menit</p>
+    <div class="paybtn" onclick="copy('081331763530')">💸 SALIN NO DANA: 0813-3176-3530</div>
+    <a id="pWa" href="#" target="_blank" class="paybtn wa">✅ SUDAH BAYAR - KIRIM BUKTI</a>
   </div>
 </div>
 
 <script>
-// SEMUA FUNGSI TARUH DISINI BIAR GA ERROR
-function bukaPopup(nama, harga){
-  document.getElementById('modalBayar').style.display = 'flex';
-  document.getElementById('namaProduk').innerText = nama;
-  document.getElementById('hargaProduk').innerText = harga? 'Rp ' + Number(harga).toLocaleString('id-ID') : '-';
-  document.getElementById('nominalQris').innerText = harga? 'Rp ' + Number(harga).toLocaleString('id-ID') : '-';
+let dataHarga = 0;
+let timerInterval;
 
-  let linkDana = harga
- ? `https://link.dana.id/qr/081331763530?amount=${harga}&notes=${encodeURIComponent(nama)}`
-  : `https://link.dana.id/qr/081331763530`;
-  document.getElementById('linkDana').href = linkDana;
+function openPay(nama,harga){
+  dataHarga = harga;
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('pNama').innerText=nama;
+  let h = 'Rp '+harga.toLocaleString('id-ID');
+  document.getElementById('pHarga').innerText=h;
+  document.getElementById('pWa').href='https://wa.me/6281331763530?text='+encodeURIComponent('Halo min saya sudah bayar '+nama+' sebesar '+h);
 
-  let pesan = `Halo min, saya sudah bayar ${nama} ${harga? 'sebesar Rp ' + Number(harga).toLocaleString('id-ID') : ''}. Ini bukti transfernya:`;
-  document.getElementById('linkWA').href = `https://wa.me/6281331763530?text=${encodeURIComponent(pesan)}`;
+  // START TIMER 5 MENIT
+  startTimer(300);
+  document.getElementById('statusWait').style.display='block';
+  document.getElementById('statusOk').style.display='none';
 }
 
-function tutupPopup(){
-  document.getElementById('modalBayar').style.display = 'none';
+function closePay(){
+  document.getElementById('modal').style.display='none';
+  clearInterval(timerInterval);
 }
 
-function copyRek(norek, bank){
-  navigator.clipboard.writeText(norek);
-  alert("No Rek " + bank + " : " + norek + "\nSudah dicopy! Transfer sesuai nominal ya");
+function copy(no){
+  navigator.clipboard.writeText(no);
+  alert('✅ Sudah dicopy: '+no+'\n\nBuka app DANA/Bank > Paste > Transfer sesuai nominal');
 }
 
-// EFEK MATRIX
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const letters = "01アイウエオカキクケコ";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-for(let x = 0; x < columns; x++) drops[x] = 1;
-function drawMatrix(){
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#0F0';
-  ctx.font = fontSize + 'px Orbitron';
-  for(let i = 0; i < drops.length; i++){
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  }
+function startTimer(detik){
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    let m = Math.floor(detik/60);
+    let s = detik%60;
+    document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    detik--;
+    if(detik<0){
+      clearInterval(timerInterval);
+      alert('⚠️ Waktu pembayaran habis. Silahkan order ulang');
+      closePay();
+    }
+  },1000)
 }
-setInterval(drawMatrix, 35);
 
-// EFEK PARTIKEL
-const pCanvas = document.getElementById('particles');
-const pCtx = pCanvas.getContext('2d');
-pCanvas.width = window.innerWidth;
-pCanvas.height = window.innerHeight;
-let particles = [];
-for(let i=0;i<50;i++){particles.push({x:Math.random()*pCanvas.width,y:Math.random()*pCanvas.height,r:Math.random()*2,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5})}
-function drawParticles(){
-  pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
-  particles.forEach(p=>{
-    pCtx.beginPath();pCtx.arc(p.x,p.y,p.r,0,Math.PI*2);pCtx.fillStyle='rgba(0,255,0,0.5)';pCtx.fill();
-    p.x+=p.dx;p.y+=p.dy;
-    if(p.x<0||p.x>pCanvas.width)p.dx*=-1;
-    if(p.y<0||p.y>pCanvas.height)p.dy*=-1;
-  })
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
+// EFEK KLIK "SUDAH BAYAR" = SIMULASI SUKSES
+document.getElementById('pWa').addEventListener('click',()=>{
+  setTimeout(()=>{
+    document.getElementById('statusWait').style.display='none';
+    document.getElementById('statusOk').style.display='block';
+  },500)
+})
+
+// MATRIX
+let c=document.getElementById('matrix'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+let d=Array(Math.floor(c.width/14)).fill(1),s="01アイウエオカ";
+setInterval(()=>{x.fillStyle='rgba(0,0,0,0.05)';x.fillRect(0,0,c.width,c.height);x.fillStyle='#0F0';x.font='14px Orbitron';
+for(let i=0;i<d.length;i++){x.fillText(s[Math.floor(Math.random()*s.length)],i*14,d[i]*14);if(d[i]*14>c.height&&Math.random()>0.975)d[i]=0;d[i]++}},35)
+
+// LIVE RANDOM
+setInterval(()=>{document.getElementById('live').innerText=Math.floor(Math.random()*300)+50},2000)
 </script>
 </body>
 </html>
