@@ -16,7 +16,72 @@ body{
   min-height:100vh;
 }
 
+/* ===== LOADING SCREEN CYBER ===== */
+#loading{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.loading-text{
+  font-family:'Orbitron', sans-serif;
+  font-size:18px;
+  color:#00f0ff;
+  letter-spacing:2px;
+  text-shadow:0 0 20px #00f0ff;
+  margin-bottom:20px;
+  animation:blink 0.5s infinite;
+}
+@keyframes blink{50%{opacity:0.3}}
+
+.loading-text.granted{
+  color:#00ff00;
+  text-shadow:0 0 20px #00ff00, 0 0 40px #00ff00;
+  animation:granted 0.5s;
+}
+@keyframes granted{0%{transform:scale(0.5);filter:blur(10px)}100%{transform:scale(1);filter:blur(0)}}
+
+.loading-bar{
+  width:320px;
+  height:5px;
+  background:#111;
+  border:1px solid #00f0ff;
+  border-radius:10px;
+  overflow:hidden;
+}
+.loading-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#ff0000,#ff6600,#00f0ff);
+  animation:load 3s linear forwards;
+  box-shadow:0 0 20px #00f0ff;
+}
+@keyframes load{to{width:100%}}
+
+.scanline{
+  position:absolute;
+  width:100%;
+  height:2px;
+  background:#00f0ff;
+  box-shadow:0 0 10px #00f0ff;
+  animation:scan 2s linear infinite;
+}
+@keyframes scan{0%{top:0}100%{top:100%}}
+
+#loading.fadeOut{animation:fadeOut 1s 1s forwards}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+/* ===== SELESAI LOADING ===== */
+
 #matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+
+.content{animation:fadeIn 1s 4.5s forwards;opacity:0}
+@keyframes fadeIn{to{opacity:1}}
 
 .logo{
   width:110px;
@@ -27,12 +92,9 @@ body{
   box-shadow:0 0 20px #ff0000, 0 0 40px #ff6600;
   animation:glow-logo 1.5s infinite alternate;
   object-fit:cover;
-  position:relative;
-  z-index:1;
 }
 @keyframes glow-logo{0%{box-shadow:0 0 15px #ff0000}100%{box-shadow:0 0 35px #ff6600}}
 
-/* JUDUL EFEK PETIR */
 h1{
   font-family:'Orbitron', sans-serif;
   font-size:24px;
@@ -40,18 +102,15 @@ h1{
   color:#fff;
   text-shadow:0 0 10px #00f0ff;
   animation:lightning 2s infinite;
-  position:relative;
-  z-index:1;
 }
 @keyframes lightning{
- 0%,100%{text-shadow:0 0 10px #00f0ff, 0 0 20px #00f0ff}
-  5%,15%{text-shadow:0 0 30px #fff, 0 0 60px #00f0ff, 0 0 90px #ff00c8}
+ 0%,100%{text-shadow:0 0 10px #00f0ff}
+ 5%,15%{text-shadow:0 0 30px #fff, 0 0 60px #00f0ff, 0 0 90px #ff00c8}
  10%{text-shadow:none}
 }
 
-.subtitle{color:#aaa;font-size:12px;margin-bottom:25px;font-weight:600;position:relative;z-index:1}
+.subtitle{color:#aaa;font-size:12px;margin-bottom:25px;font-weight:600}
 
-/* TOMBOL MERAH API BARU */
 .btn-full{
   display:block;
   background:linear-gradient(90deg,#ff0000,#ff6600,#ff0000);
@@ -67,8 +126,6 @@ h1{
   box-shadow:0 0 25px #ff0000aa;
   border:2px solid #ff6600;
   animation:fire 1.5s infinite, pulse 1.5s infinite;
-  position:relative;
-  z-index:1;
 }
 @keyframes fire{0%{background-position:0%}100%{background-position:200%}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
@@ -79,8 +136,6 @@ h2{
   margin:30px 0 15px;
   font-size:16px;
   letter-spacing:2px;
-  position:relative;
-  z-index:1;
 }
 
 .btn{
@@ -94,44 +149,71 @@ h2{
   color:white;
   border:1px solid #ff000066;
   transition:0.3s;
-  position:relative;
-  z-index:1;
 }
-.btn:hover{border-color:#ff0000;box-shadow:0 0 20px #ff0000}
+.btn:hover{border-color:#ff0000;box-shadow:0 0 20px #ff0000;transform:translateY(-2px)}
 .btn b{font-family:'Orbitron', sans-serif;font-size:14px}
 .btn span{color:#aaa;font-size:11px;font-weight:600}
 </style>
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loading">
+  <div class="scanline"></div>
+  <div class="loading-text" id="loadText">ACCESSING MLBB DATABASE...</div>
+  <div class="loading-bar"><div class="loading-fill"></div></div>
+</div>
+
 <canvas id="matrix"></canvas>
 
-<img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg" alt="Logo">
+<div class="content">
+  <img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg" alt="Logo">
 
-<h1>⚡ MLBB SCRIPT GM HUB ⚡</h1>
-<p class="subtitle">Download Script Damage - Rank Booster - No Password</p>
+  <h1>⚡ MLBB SCRIPT GM HUB ⚡</h1>
+  <p class="subtitle">Download Script Damage - Rank Booster - No Password</p>
 
-<a class="btn-full" href="LINK_FULL_PAKET_KAMU">🔥 DOWNLOAD FULL SCRIPT GM 🔥</a>
+  <a class="btn-full" href="https://t.me/+wzc2pT_ejKczMTA1">🔥 DOWNLOAD FULL SCRIPT GM 🔥</a>
 
-<h2>PILIH KATEGORI SCRIPT</h2>
+  <h2>PILIH KATEGORI SCRIPT</h2>
 
-<a class="btn" href="LINK_DAMAGE">🔥 <b>SCRIPT DAMAGE</b><br><span>All Hero Damage 100% - No Cooldown</span></a>
+  <a class="btn" href="LINK_DAMAGE">🔥 <b>SCRIPT DAMAGE</b><br><span>All Hero Damage 100% - No Cooldown</span></a>
 
-<a class="btn" href="LINK_RANK">👑 <b>SCRIPT RANK BOOSTER</b><br><span>Auto WS - MVP Terus</span></a>
+  <a class="btn" href="LINK_RANK">👑 <b>SCRIPT RANK BOOSTER</b><br><span>Auto WS - MVP Terus</span></a>
 
-<a class="btn" href="https://www.mediafire.com/file/5ksp05qgyg1xjlv/FIX+LAG+SMOOTH+BY+GM.zip/file">⚡ <b>SCRIPT ANTI LAG</b><br><span>FPS Stabil - Ping Ijo Terus</span></a>
+  <a class="btn" href="https://www.mediafire.com/file/5ksp05qgyg1xjlv/FIX+LAG+SMOOTH+BY+GM.zip/file">⚡ <b>SCRIPT ANTI LAG</b><br><span>FPS Stabil - Ping Ijo Terus</span></a>
+</div>
 
-<audio autoplay loop>
+<!-- MUSIK BACKGROUND -->
+<audio id="bgm" autoplay loop>
   <source src="https://drive.google.com/uc?export=download&id=1a0DNmqWGnA7W0yeZr1-ykZ_773-xqgKD" type="audio/mpeg">
 </audio>
 
+<!-- SUARA ACCESS GRANTED -->
+<audio id="grantedSound">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_d1714a3b24.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+// SCRIPT LOADING + SUARA
+setTimeout(()=>{
+  document.getElementById('loadText').innerText = "ACCESS GRANTED";
+  document.getElementById('loadText').classList.add('granted');
+  document.getElementById('grantedSound').play(); // SUARA NYALA DISINI
+  document.getElementById('loading').classList.add('fadeOut');
+},3000);
+
+// AUTO PLAY BGM SETELAH KLIK
+document.addEventListener('click', ()=>{
+  document.getElementById('bgm').play();
+})
+
+// SCRIPT MATRIX
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const chars = "01";
+const chars = "01MLBBSCRIPT";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
 const drops = [];
