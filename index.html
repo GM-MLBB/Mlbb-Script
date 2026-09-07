@@ -7,81 +7,94 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:'Orbitron',sans-serif;overflow-x:hidden}
-#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.3}
+body{background:linear-gradient(180deg,#000000,#1a0f00);color:#fff;font-family:'Orbitron',sans-serif;overflow-x:hidden;min-height:100vh}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
 .wrap{max-width:480px;margin:0 auto;padding:20px;text-align:center;position:relative;z-index:2}
-.logo{width:90px;border:2px solid red;border-radius:10px;box-shadow:0 0 20px red;margin:10px auto}
-h1{color:#00ff00;font-size:24px;font-weight:900;text-shadow:0 0 15px #00ff00;animation:flicker 1.5s infinite}
-@keyframes flicker{0%,100%{opacity:1}50%{opacity:0.8}}
-.box{background:rgba(0,255,0,0.08);border:1px solid #0f0;border-radius:10px;padding:10px;margin:15px 0;font-size:12px}
+.logo{width:100px;border:3px solid #FFD700;border-radius:15px;box-shadow:0 0 30px #FFD700,0 0 60px rgba(255,215,0,0.5);margin:15px auto;animation:glow 2s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 30px #FFD700}50%{box-shadow:0 0 50px #FFD700}}
+h1{color:#FFD700;font-size:26px;font-weight:900;text-shadow:0 0 20px #FFD700,0 0 40px #FFA500;letter-spacing:2px;animation:flicker 1.5s infinite}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:0.9}}
+.subtitle{color:#ccc;font-size:11px;margin-bottom:20px}
+.box{background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(0,0,0,0.5));border:1px solid #FFD700;border-radius:12px;padding:12px;margin:15px 0;font-size:12px;box-shadow:0 0 15px rgba(255,215,0,0.3)}
 .live{display:flex;justify-content:space-between;margin-top:5px}
-.dot{width:8px;height:8px;background:#0f0;border-radius:50%;animation:blink 1s infinite;display:inline-block}
+.dot{width:8px;height:8px;background:#FFD700;border-radius:50%;animation:blink 1s infinite;display:inline-block;box-shadow:0 0 10px #FFD700}
 @keyframes blink{50%{opacity:0}}
-.btn{display:block;width:100%;padding:14px;margin:10px 0;border-radius:10px;text-decoration:none;font-weight:900;font-size:14px;transition:0.2s;cursor:pointer;border:none}
-.btn:hover{transform:scale(1.03)}
-.btn-tele{background:#0088cc;color:#fff}
-.btn-free{background:transparent;border:2px solid #0f0;color:#0f0;box-shadow:0 0 15px #0f0}
-.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
-.item{background:#111;border:2px solid #FFD700;border-radius:10px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.item:hover{box-shadow:0 0 20px #FFD700}
-.item b{color:#FFD700}
-.badge{background:#FFD700;color:#000;font-size:10px;padding:2px 6px;border-radius:4px}
-hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#0f0,transparent);margin:20px 0}
+.btn{display:block;width:100%;padding:15px;margin:10px 0;border-radius:12px;text-decoration:none;font-weight:900;font-size:15px;transition:0.3s;cursor:pointer;border:none;letter-spacing:1px}
+.btn:hover{transform:scale(1.04)}
+.btn-tele{background:linear-gradient(90deg,#0088cc,#00aaff);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 0 20px rgba(0,136,204,0.6)}
+.btn-free{background:transparent;border:2px solid #0f0;color:#0f0;box-shadow:0 0 20px rgba(0,255,0,0.5)}
+.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;box-shadow:0 0 25px rgba(255,215,0,0.7)}
+.item{background:linear-gradient(135deg,#111,#1a1a1a);border:2px solid #FFD700;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 0 15px rgba(255,215,0,0.2);transition:0.2s}
+.item:hover{box-shadow:0 0 30px #FFD700;border-color:#FFF;transform:translateY(-2px)}
+.item b{color:#FFD700;font-size:16px;text-shadow:0 0 10px #FFD700}
+.badge{background:#FFD700;color:#000;font-size:10px;padding:3px 8px;border-radius:5px;font-weight:900}
+hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#FFD700,transparent);margin:20px 0}
 
-/* POPUP AUTO BAYAR */
+/* POPUP */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:999;justify-content:center;align-items:center}
-.modal-box{background:#0a0a0a;border:2px solid #FFD700;border-radius:15px;padding:20px;width:90%;max-width:400px;position:relative;text-align:center}
-.close{position:absolute;top:10px;right:15px;font-size:24px;color:#fff;cursor:pointer}
-.auto-title{color:#FFD700;font-size:18px;font-weight:900;margin-bottom:10px}
-.qris-big{width:200px;height:200px;border:3px solid #0f0;border-radius:12px;margin:10px auto;box-shadow:0 0 20px #0f0}
-.timer{font-size:32px;color:#00ff00;font-weight:900;text-shadow:0 0 10px #0f0}
+.modal-box{background:linear-gradient(180deg,#111,#000);border:2px solid #FFD700;border-radius:15px;padding:20px;width:90%;max-width:400px;position:relative;text-align:center;box-shadow:0 0 40px #FFD700}
+.close{position:absolute;top:10px;right:15px;font-size:24px;color:#FFD700;cursor:pointer}
+.auto-title{color:#FFD700;font-size:18px;font-weight:900;margin-bottom:10px;text-shadow:0 0 10px #FFD700}
+.qris-wrap{position:relative;display:inline-block}
+.qris-big{width:200px;height:200px;border:3px solid #FFD700;border-radius:12px;margin:10px auto;box-shadow:0 0 20px #FFD700}
+.scan-line{position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,#00ff00,transparent);animation:scan 2s linear infinite}
+@keyframes scan{0%{top:0}100%{top:200px}}
+.timer{font-size:32px;color:#FFD700;font-weight:900;text-shadow:0 0 10px #FFD700}
 .nominal{font-size:24px;color:#FFD700;font-weight:900}
 .status{margin:15px 0;padding:10px;border-radius:8px;background:#222}
 .status.waiting{border:1px solid #FFD700;color:#FFD700}
 .status.success{border:1px solid #0f0;color:#0f0;display:none}
-.paybtn{display:block;background:#222;border:1px solid #444;color:#fff;padding:12px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:700;cursor:pointer}
+
+/* TOMBOL DENGAN ICON */
+.paybtn{display:flex;align-items:center;justify-content:center;gap:8px;background:#222;border:1px solid #444;color:#fff;padding:12px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:700;cursor:pointer}
+.paybtn:hover{border-color:#FFD700}
 .wa{background:#25D366!important}
+.tele{background:#0088cc!important}
+.dana{background:#118EEA!important}
 </style>
 </head>
 <body>
-<canvas id="matrix"></canvas>
+<canvas id="particles"></canvas>
 
 <div class="wrap">
   <img class="logo" src="https://i.imgur.com/WAFwwaL.jpeg">
   <h1>MLBB SCRIPT PREMIUM</h1>
-  <p style="color:#aaa;font-size:11px">ANTI BAN 100%</p>
+  <p class="subtitle">ANTI BAN 100% | VIP SCRIPT</p>
 
   <div class="box">
-    📍 TARGET: Mlonggo, Indonesia [IP]
+    📍 TARGET: Mlonggo, Indonesia
     <div class="live">
       <span><span class="dot"></span> LIVE: <span id="live">0</span></span>
-      <span>PING: <b style="color:#0f0">12ms</b></span>
+      <span>PING: <b style="color:#FFD700">12ms</b></span>
     </div>
   </div>
 
-  <h3>FREE DOWNLOAD</h3>
-  <a class="btn btn-tele" href="https://t.me/+wzc2pT_ejKczMTA1" target="_blank">📢 JOIN TELEGRAM GM</a>
-  <div class="btn btn-free" onclick="alert('Link: https://ComingSoon')">🔥 SCRIPT DAMAGE FREE<br><small style="font-weight:400">Basic Damage +10% - No Ban</small></div>
+  <h3 style="color:#fff">FREE DOWNLOAD</h3>
+  <a class="btn btn-tele" href="hhttps://t.me/+wzc2pT_ejKczMTA1" target="_blank"> 
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+    JOIN TELEGRAM GM
+  </a>
+  <div class="btn btn-free" onclick="alert('Link: https://linkkamu.com/free')">🔥 SCRIPT DAMAGE FREE<br><small style="font-weight:400">Basic Damage +10% - No Ban</small></div>
 
   <hr>
   <h3 style="color:#FFD700">👑 PREMIUM ACCESS 👑</h3>
-  <div class="btn btn-gold" onclick="openPay('JOIN MEMBERSHIP GM',50000)">👑 JOIN MEMBERSHIP GM 👑</div>
+  <div class="btn btn-gold" onclick="openPay('JOIN MEMBERSHIP GM',100000)">👑 JOIN MEMBERSHIP GM 👑</div>
 
   <div class="item" onclick="openPay('SCRIPT DAMAGE PREMIUM',150000)">
-    <div>⭐ SCRIPT DAMAGE PREMIUM<br><span class="badge">PRO</span></div><b>150K</b>
+    <div>SCRIPT DAMAGE PREMIUM<br><span class="badge">PRO</span></div><b>1.5JT</b>
   </div>
-  <div class="item" onclick="openPay('SCRIPT RANK BOOSTER',75000)">
-    <div>🚀 SCRIPT RANK BOOSTER<br><span class="badge">PRO</span></div><b>75K</b>
+  <div class="item" onclick="openPay('SCRIPT RANK BOOSTER',750000)">
+    <div>SCRIPT RANK BOOSTER<br><span class="badge">PRO</span></div><b>750K</b>
   </div>
-  <div class="item" onclick="openPay('INJECT DAMAGE NO CLONE',125000)">
-    <div>⚡ INJECT DAMAGE NO CLONE<br><span class="badge">PRO</span></div><b>125K</b>
+  <div class="item" onclick="openPay('INJECT DAMAGE NO CLONE',1250000)">
+    <div>INJECT DAMAGE NO CLONE<br><span class="badge">PRO</span></div><b>1.25JT</b>
   </div>
-  <div class="item" onclick="openPay('PAKET COMBO HEMAT',50000)">
-    <div>👑 PAKET COMBO HEMAT<br><span class="badge">PRO</span></div><b>50K</b>
+  <div class="item" onclick="openPay('PAKET COMBO HEMAT',500000)">
+    <div>PAKET COMBO HEMAT<br><span class="badge">PRO</span></div><b>500K</b>
   </div>
 </div>
 
-<!-- POPUP AUTO BAYAR -->
+<!-- POPUP -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <span class="close" onclick="closePay()">×</span>
@@ -95,14 +108,32 @@ hr{border:none;height:2px;background:linear-gradient(90deg,transparent,#0f0,tran
     </div>
     <div class="status success" id="statusOk">
       ✅ PEMBAYARAN TERDETEKSI<br>
-      <small>File akan dikirim via WA</small>
+      <small>File akan dikirim via WA/Tele</small>
     </div>
 
-    <img src="https://i.imgur.com/JCmPhXL.jpeg" class="qris-big">
-    <p style="font-size:11px;color:#aaa">All Scan Bank + Ewallet</p>
+    <div class="qris-wrap">
+      <img src="https://i.imgur.com/JCmPhXL.jpeg" class="qris-big">
+      <div class="scan-line"></div>
+    </div>
+    <p style="font-size:11px;color:#aaa">Scan pake DANA / OVO / Gopay / ShopeePay</p>
 
-    <div class="paybtn" onclick="copy('081331763530')">💸 SALIN NO DANA: 0813-3176-3530</div>
-    <a id="pWa" href="#" target="_blank" class="paybtn wa">✅ SUDAH BAYAR - KIRIM BUKTI</a>
+    <!-- ICON DANA -->
+    <div class="paybtn dana" onclick="copy('081331763530')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.5 16.5h-9a1.5 1.5 0 01-1.5-1.5v-6a1.5 1.5 0 011.5-1.5h9a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-1.5 1.5z"/></svg>
+      SALIN NO DANA: 0813-3176-3530
+    </div>
+
+    <!-- ICON WHATSAPP -->
+    <a id="pWa" href="#" target="_blank" class="paybtn wa">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.449C18.238 1.245 15.24 0.006 12.04 0h-.014C5.975 0.006 1.05 4.93 1.042 11c0 1.97.515 3.89 1.49 5.59L0 24l7.52-1.971c1.63.891 3.48 1.36 5.37 1.36h.014c6.06 0 10.985-4.927 11-10.987.01-2.94-1.135-5.7-3.22-7.75zM12.04 21.35h-.01c-1.67 0-3.3-.45-4.74-1.3l-.34-.2-4.46 1.17 1.18-4.35-.22-.35c-.933-1.48-1.43-3.2-1.42-4.92.007-5.06 4.14-9.2 9.22-9.2h.01c2.46.006 4.77 1.02 6.45 2.7 1.68 1.68 2.6 3.9 2.6 6.27 0 5.06-4.13 9.19-9.19 9.19z"/></svg>
+      SUDAH BAYAR - KIRIM BUKTI WA
+    </a>
+
+    <!-- ICON TELEGRAM -->
+    <a id="pTele" href="#" target="_blank" class="paybtn tele">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+      SUDAH BAYAR - KIRIM BUKTI TELEGRAM
+    </a>
   </div>
 </div>
 
@@ -116,9 +147,11 @@ function openPay(nama,harga){
   document.getElementById('pNama').innerText=nama;
   let h = 'Rp '+harga.toLocaleString('id-ID');
   document.getElementById('pHarga').innerText=h;
-  document.getElementById('pWa').href='https://wa.me/6281331763530?text='+encodeURIComponent('Halo min saya sudah bayar '+nama+' sebesar '+h);
-
-  // START TIMER 5 MENIT
+  
+  let pesan = 'Halo min saya sudah bayar '+nama+' sebesar '+h;
+  document.getElementById('pWa').href='https://wa.me/6281331763530?text='+encodeURIComponent(pesan);
+  document.getElementById('pTele').href='https://t.me/ERR0R_CODER?text='+encodeURIComponent(pesan); // GANTI USERNAME TELE
+  
   startTimer(300);
   document.getElementById('statusWait').style.display='block';
   document.getElementById('statusOk').style.display='none';
@@ -141,27 +174,23 @@ function startTimer(detik){
     let s = detik%60;
     document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
     detik--;
-    if(detik<0){
-      clearInterval(timerInterval);
-      alert('⚠️ Waktu pembayaran habis. Silahkan order ulang');
-      closePay();
-    }
+    if(detik<0){clearInterval(timerInterval);alert('⚠️ Waktu pembayaran habis');closePay();}
   },1000)
 }
 
-// EFEK KLIK "SUDAH BAYAR" = SIMULASI SUKSES
-document.getElementById('pWa').addEventListener('click',()=>{
+document.getElementById('pWa').addEventListener('click',()=>{success()})
+document.getElementById('pTele').addEventListener('click',()=>{success()})
+function success(){
   setTimeout(()=>{
     document.getElementById('statusWait').style.display='none';
     document.getElementById('statusOk').style.display='block';
   },500)
-})
+}
 
-// MATRIX
-let c=document.getElementById('matrix'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
-let d=Array(Math.floor(c.width/14)).fill(1),s="01アイウエオカ";
-setInterval(()=>{x.fillStyle='rgba(0,0,0,0.05)';x.fillRect(0,0,c.width,c.height);x.fillStyle='#0F0';x.font='14px Orbitron';
-for(let i=0;i<d.length;i++){x.fillText(s[Math.floor(Math.random()*s.length)],i*14,d[i]*14);if(d[i]*14>c.height&&Math.random()>0.975)d[i]=0;d[i]++}},35)
+// PARTIKEL EMAS
+const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;
+let parts=[];for(let i=0;i<60;i++){parts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*3+1,sp:Math.random()*0.5+0.2})}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);parts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fillStyle='rgba(255,215,0,0.7)';ctx.fill();p.y+=p.sp;if(p.y>canvas.height)p.y=0});requestAnimationFrame(draw)}draw()
 
 // LIVE RANDOM
 setInterval(()=>{document.getElementById('live').innerText=Math.floor(Math.random()*300)+50},2000)
