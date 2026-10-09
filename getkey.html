@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V3 GM - GET FREE KEY</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
+.box{background:#1e1e1e;border:2px solid #9e8ed6;border-radius:20px;padding:25px;width:90%;max-width:380px;text-align:center;box-shadow:0 0 20px #9e8ed633}
+h1{color:#b4ff00;margin:0 0 5px;font-size:24px}
+.sub{color:#9e8ed6;font-size:12px;margin-bottom:20px;letter-spacing:2px}
+.key-box{background:#000;border:1px dashed #b4ff00;border-radius:12px;padding:15px;margin:15px 0;font-family:monospace;font-size:16px;word-break:break-all;color:#b4ff00}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:8px}
+.btn-copy{background:#9e8ed6;color:#000}
+.btn-copy:active{background:#b4ff00}
+.btn-refresh{background:transparent;color:#9e8ed6;border:1px solid #9e8ed6;margin-top:10px}
+.expired{color:#ff4444;font-size:12px;margin-top:10px}
+.valid{color:#b4ff00;font-size:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>V3 GM PANEL</h1>
+<div class="sub">FREE KEY SYSTEM</div>
+<div id="status" class="valid">Mengambil key dari Github...</div>
+<div id="key" class="key-box">LOADING...</div>
+<button class="btn btn-copy" onclick="copyKey()">COPY KEY</button>
+<button class="btn btn-refresh" onclick="loadKey()">REFRESH KEY</button>
+<div id="exp" class="expired"></div>
+<div style="margin-top:20px;font-size:10px;color:#555">Powered by GM-MLBB | Auto Expired Check</div>
+</div>
+<script>
+const RAW_URL="https://raw.githubusercontent.com/GM-MLBB/Mlbb-Script/main/free.txt";
+let currentKey="";
+async function loadKey(){
+ try{
+  const r=await fetch(RAW_URL+"?t="+Date.now());
+  const t=await r.text();
+  const lines=t.split("\n").map(s=>s.trim()).filter(s=>s);
+  let found="";
+  let expInfo="";
+  for(let line of lines){
+    if(line.startsWith("#")) continue;
+    if(line.includes("|")){
+      let [k,d]=line.split("|");
+      let exp=new Date(d);
+      let now=new Date();
+      now.setHours(0,0,0,0);
+      if(exp>=now){ found=k.trim(); expInfo="Expired: "+d; break; }
+    }else{ found=line; expInfo="Permanent Key"; break; }
+  }
+  if(found){
+    currentKey=found;
+    document.getElementById("key").innerText=found;
+    document.getElementById("status").innerText="✅ KEY AKTIF";
+    document.getElementById("status").className="valid";
+    document.getElementById("exp").innerText=expInfo;
+  }else{
+    document.getElementById("key").innerText="NO KEY AVAILABLE";
+    document.getElementById("status").innerText="❌ SEMUA KEY EXPIRED";
+  }
+ }catch(e){
+  document.getElementById("key").innerText="GAGAL LOAD";
+ }
+}
+function copyKey(){
+ if(!currentKey) return;
+ navigator.clipboard.writeText(currentKey);
+ document.getElementById("status").innerText="📋 COPIED!";
+ setTimeout(()=>{document.getElementById("status").innerText="✅ KEY AKTIF"},1500);
+}
+loadKey();
+</script>
+</body>
+</html>
