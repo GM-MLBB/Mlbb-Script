@@ -1,29 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GM GetKey</title>
+<title>GM VIP - GET KEY</title>
 <style>
-body{background:#000;color:#fff;font-family:sans-serif;text-align:center;padding:20px}
-.card{background:#111;border:1px solid red;border-radius:12px;padding:20px;margin:10px}
-.key{font-size:20px;color:#ff0000;font-weight:bold;margin:10px 0}
-button{background:red;color:#000;padding:12px 20px;border:none;border-radius:8px;font-weight:bold}
+body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:15px}
+.card{background:#151515;border:2px solid #ff0000;border-radius:15px;padding:20px;margin:15px 0;box-shadow:0 0 15px #ff000055}
+.key{font-size:22px;color:#00ff88;font-weight:bold;background:#000;padding:12px;border-radius:8px;margin:15px 0;letter-spacing:1px;word-break:break-all}
+button{background:linear-gradient(90deg,#ff0000,#ff6600);color:#fff;border:none;padding:14px 25px;border-radius:10px;font-weight:bold;font-size:16px;margin:5px;width:90%}
+.timer{color:#ffcc00;font-size:18px;margin:10px 0}
+.exp{color:#888;font-size:12px}
 </style>
 </head>
 <body>
-<h2>⚡ GM LOADER VIP - GET KEY</h2>
+<h2 style="color:#ff0000">⚡ GM LOADER VIP ⚡</h2>
 <div class="card">
-<div>Key Active 1 Day - 1 Device</div>
-<div class="key" id="k">GMVIP-1001-2026</div>
-<button onclick="copy()">COPY KEY</button>
-<button onclick="next()">NEXT KEY</button>
+<div style="color:#ff0000;font-weight:bold">🔑 KEY AKTIF 1 HARI</div>
+<div id="status" class="timer">Loading keys.txt...</div>
+<div class="key" id="keyBox">-</div>
+<button onclick="copyKey()">📋 COPY KEY</button>
+<button onclick="nextKey()">🔄 NEXT KEY</button>
+<div class="exp" id="expText">Expired dalam: 23:59:59<br>1 Device = 1 Key</div>
 </div>
-<p>Keys from keys.txt - Auto Update via GitHub</p>
+<div class="exp">Keys from keys.txt - Auto Update via GitHub<br>github.com/GM-MLBB/Mlbb-Script</div>
+
 <script>
-let keys=["GMVIP-1001-2026","GMVIP-1002-2026","GMVIP-1003-2026","GMVIP-1004-2026","GMVIP-1005-2026"];
-let i=0;
-function copy(){navigator.clipboard.writeText(document.getElementById('k').innerText);alert('Key Copied!');}
-function next(){i=(i+1)%keys.length;document.getElementById('k').innerText=keys[i];}
+let keys = [];
+let idx = 0;
+const keysUrl = "https://raw.githubusercontent.com/GM-MLBB/Mlbb-Script/main/keys.txt";
+
+async function loadKeys(){
+  try{
+    let r = await fetch(keysUrl + "?t=" + Date.now());
+    let txt = await r.text();
+    keys = txt.split("\n").map(s=>s.trim()).filter(s=>s.length>5);
+    if(keys.length==0) throw "empty";
+    document.getElementById("status").innerHTML = "✅ " + keys.length + " Key Ready";
+    showKey();
+  }catch(e){
+    keys = ["GMVIP-1001-2026","GMVIP-1002-2026","GMVIP-1003-2026","GMVIP-1004-2026","GMVIP-1005-2026"];
+    document.getElementById("status").innerHTML = "⚠️ Offline Mode - 5 Key";
+    showKey();
+  }
+}
+function showKey(){
+  if(keys.length==0) return;
+  document.getElementById("keyBox").innerText = keys[idx];
+}
+function nextKey(){
+  idx = (idx+1) % keys.length;
+  showKey();
+}
+function copyKey(){
+  let k = document.getElementById("keyBox").innerText;
+  navigator.clipboard.writeText(k).then(()=>{alert("Copied: "+k+"\nValid 24 Jam!")});
+}
+// Timer 24 Jam Mundur
+function updateTimer(){
+  let now = new Date();
+  let tomorrow = new Date();
+  tomorrow.setHours(24,0,0,0);
+  let diff = tomorrow - now;
+  let h = Math.floor(diff/3600000);
+  let m = Math.floor((diff%3600000)/60000);
+  let s = Math.floor((diff%60000)/1000);
+  document.getElementById("expText").innerHTML = `Expired dalam: ${h}:${m}:${s}<br>Reset jam 00:00 WIB - 1 Device Only`;
+}
+setInterval(updateTimer,1000);
+loadKeys();
+updateTimer();
 </script>
 </body>
 </html>
